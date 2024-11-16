@@ -1,6 +1,107 @@
 <!-- markdownlint-disable MD030 -->
 
-<img width="100%" src="https://github.com/FlowiseAI/Flowise/blob/main/images/flowise.png?raw=true"></a>
+# Flowise - Deploy to Render.com
+
+## Prerequisites
+
+1. A GitHub account.
+2. A Render account (free or starter plan depending on use case).
+3. Access to the chatbot’s source code repository on GitHub.
+4. Environment variables required for the chatbot (e.g., username, password, Node.js version).
+
+---
+
+## Step 1: Fork the Chatbot Repository
+
+1. Log in to your GitHub account.
+2. Navigate to the chatbot repository and click on the **Fork** button.
+3. Authorize and confirm the fork.
+4. _(Optional)_ Synchronize the fork if updates are available:
+    - Go to **Settings** > **Synchronize Fork** > **Update Branch**.
+
+---
+
+## Step 2: Set Up a Render Account
+
+1. Visit [Render](https://render.com) and create an account.
+2. Log in using Google or manually create an account.
+3. Select **Start for Free** for testing or upgrade to the **Starter Plan** for permanent hosting.
+
+---
+
+## Step 3: Create a New Web Service on Render
+
+1. Go to the Render dashboard and click **New** > **Web Service**.
+2. Choose **Deploy from a Git Repository**.
+3. If prompted, connect your GitHub account.
+4. Select the forked repository containing the chatbot code.
+5. Name the service (e.g., `flowwise-chatbot`).
+6. Choose your region (e.g., Frankfurt EU Central for EU users).
+7. Leave the branch as `main`.
+
+---
+
+## Step 4: Configure Runtime
+
+1. **Runtime Environment**: Choose `Docker`.
+2. **Plan**:
+    - Free Plan: Suitable for testing but has limitations (e.g., no persistent storage, services spin down after inactivity).
+    - Starter Plan: Required for permanent hosting, persistent disk, and faster response times.
+
+---
+
+## Step 5: Set Environment Variables
+
+1. Refer to the chatbot documentation for the required environment variables:
+    - `FLOWWISE_USERNAME` (e.g., `admin1`)
+    - `FLOWWISE_PASSWORD` (e.g., `your_password`)
+    - `NODE_VERSION` (e.g., `18.1`)
+2. Add these variables on Render:
+    - Go to **Environment Variables**.
+    - Add variables one by one, entering the name and value.
+3. For Starter Plan users, add additional variables for persistent storage:
+    - `DATABASE_PATH`: `/opt/render/.flowwise`
+    - `API_KEY_PATH`: `/opt/render/.flowwise`
+    - `LOG_PATH`: `/opt/render/.flowwise/logs`
+    - `SECRET_KEY_PATH`: `/opt/render/.flowwise`
+
+---
+
+## Step 6: Configure Persistent Disk (Starter Plan Only)
+
+1. Navigate to **Advanced Settings** and enable a persistent disk.
+2. Mount path: `/opt/render/.flowwise`.
+3. Disk size: Set to `1 GB`.
+
+---
+
+## Step 7: Deploy the Service
+
+1. Click **Deploy Web Service**.
+2. Wait for the build and deployment to complete (2–5 minutes).
+3. Once live, note the service URL for accessing the chatbot.
+
+---
+
+## Step 8: Test the Chatbot
+
+1. Access the chatbot using the service URL.
+2. Log in with the credentials you set (`FLOWWISE_USERNAME` and `FLOWWISE_PASSWORD`).
+3. Test creating and managing chat flows to ensure the chatbot is functional.
+
+---
+
+## Key Considerations
+
+-   **Free Plan**: Suitable for testing but has limitations (no persistent disk, services spin down after inactivity).
+-   **Starter Plan**: Required for permanent hosting; costs approximately $7/month.
+-   **Client Use**: Charge clients for hosting and maintenance, potentially earning significant revenue.
+
+---
+
+## Next Steps
+
+-   Explore integrating the hosted chatbot into websites or client projects (to be covered in the next tutorial).
 
 # Flowise - Build LLM Apps Easily
 
